@@ -4,8 +4,14 @@ import React, {
   useReducer
 } from 'react'
 
-type props = {
-  children: React.ReactNode
+interface PopularState {
+  kind: string
+  etag: string
+  id: string
+}
+
+interface InitialState {
+  popular: PopularState[]
 }
 
 const initialState = {
@@ -21,12 +27,15 @@ const reducer = (state: any, action: any) => {
   }
 }
 
-export const Store = createContext({
+export const Store = createContext<{
+  globalState: InitialState
+  setGlobalState: React.Dispatch<any>
+}>({
   globalState: initialState,
-  setGlobalState: ({}) => null
+  setGlobalState: () => null
 })
 
-export const StoreProvider: FC = ({children}: props) => {
+export const StoreProvider: FC = ({children}) => {
   const [globalState, setGlobalState] = useReducer(reducer, initialState)
 
   return (

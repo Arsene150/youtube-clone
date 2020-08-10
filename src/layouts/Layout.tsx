@@ -1,11 +1,14 @@
 import React, {FC} from 'react'
 
 import Header from '../components/organisms/Header'
+import Style from '../assets/scss/layouts/Layout.module.scss'
 
 const Layout: FC = ({children}) => (
-  <div>
+  <div className={Style.wrapper}>
     <Header />
-    {children}
+    <div className={Style.main}>
+      {children}
+    </div>
   </div>
 )
 
